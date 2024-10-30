@@ -1,0 +1,42 @@
+// .devcontainer/devcontainer.json
+{
+    "name": "Full Stack Dev Environment",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "frontend",
+    "workspaceFolder": "/workspace",
+    
+    "features": {
+      "ghcr.io/devcontainers/features/node:1": {
+        "version": "18"
+      },
+      "ghcr.io/devcontainers/features/python:1": {
+        "version": "3.9"
+      }
+    },
+  
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "dbaeumer.vscode-eslint",
+          "esbenp.prettier-vscode",
+          "bradlc.vscode-tailwindcss",
+          "ms-python.python",
+          "ms-python.vscode-pylance",
+          "GitHub.copilot"
+        ],
+        "settings": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+          }
+        }
+      }
+    },
+  
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+    
+    "forwardPorts": [3000, 5000, 8000],
+    
+    "remoteUser": "node"
+  }

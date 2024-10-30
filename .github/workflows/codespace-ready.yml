@@ -1,0 +1,24 @@
+# .github/workflows/codespace-ready.yml
+name: Codespace Ready Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-codespace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Create test container
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/${{ github.repository }}/devcontainer
+          push: never
+          runCmd: |
+            cd frontend && pnpm install
+            cd ../backend && pip install -r requirements.txt
+            cd ../ai-service && pip install -r requirements.txt
